@@ -42,7 +42,8 @@ namespace Encuestadora_Identity2.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     CustomTag = table.Column<string>(maxLength: 80, nullable: true),
                     Nombre = table.Column<string>(maxLength: 80, nullable: true),
-                    precioCliente = table.Column<int>(nullable: false)
+                    precioCliente = table.Column<int>(nullable: false),
+                    puntosAcumulados = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,7 +206,6 @@ namespace Encuestadora_Identity2.Migrations
                     OpcionPreguntaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     tituloOpcion = table.Column<string>(maxLength: 40, nullable: false),
-                    opcionSeleccionada = table.Column<bool>(nullable: false),
                     PreguntaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

@@ -28,6 +28,13 @@ namespace Encuestadora_Identity2.Models
         [EnumDataType(typeof(PrecioCliente))]
         public PrecioCliente precioCliente { get; set; }
 
+        [Display(Name = "Puntos Acumulados")]
+        public int puntosAcumulados { get; set; }
+        public void sumarPuntosEncuesta(int puntosRecibidos)
+        {
+            this.puntosAcumulados += puntosRecibidos;
+        }
+
         //RELACION 1 a N CON ENCUESTA (CLIENTE es la entidad principal y ENCUESTA es la entidad dependiente)
         [Display(Name = "Encuestas")]
         public virtual ICollection<Encuesta> encuestas { get; set; }

@@ -37,7 +37,7 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Phone]
-            [Display(Name = "Telefono")]
+            [Display(Name = "Telefono(Opcional)")]
             public string PhoneNumber { get; set; }
             //AGREGADO
             [Required]
@@ -51,6 +51,12 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
             [MaxLength(80, ErrorMessage = "El maximo permitido para el {0} es {1}")]
             [Display(Name = "Nombre Completo")]
             public string Nombre { get; set; }
+
+            //AGREGADO
+            [Required]
+            [Display(Name = "Membresia")]
+            [EnumDataType(typeof(PrecioCliente))]
+            public PrecioCliente PrecioCliente { get; set; }
 
         }
 
@@ -66,7 +72,8 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = phoneNumber,
                 //AGREGADO
                 CustomTag = user.CustomTag,
-                Nombre = user.Nombre
+                Nombre = user.Nombre,
+                PrecioCliente = user.precioCliente
             };
         }
 
@@ -115,6 +122,10 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
             if (Input.Nombre != user.Nombre)
             {
                 user.Nombre = Input.Nombre;
+            }
+            if (Input.PrecioCliente != user.precioCliente)
+            {
+                user.precioCliente = Input.PrecioCliente;
             }
             //AGREGADO
             await _userManager.UpdateAsync(user);

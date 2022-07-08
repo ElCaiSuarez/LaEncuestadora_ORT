@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Encuestadora_Identity2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220708172228_CustomUserData1")]
+    [Migration("20220708205327_CustomUserData1")]
     partial class CustomUserData1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,6 +82,9 @@ namespace Encuestadora_Identity2.Migrations
                         .HasMaxLength(256);
 
                     b.Property<int>("precioCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("puntosAcumulados")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -172,9 +175,6 @@ namespace Encuestadora_Identity2.Migrations
 
                     b.Property<int?>("PreguntaId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("opcionSeleccionada")
-                        .HasColumnType("bit");
 
                     b.Property<string>("tituloOpcion")
                         .IsRequired()

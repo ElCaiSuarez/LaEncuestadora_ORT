@@ -82,6 +82,9 @@ namespace Encuestadora_Identity2.Migrations
                     b.Property<int>("precioCliente")
                         .HasColumnType("int");
 
+                    b.Property<int>("puntosAcumulados")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -170,9 +173,6 @@ namespace Encuestadora_Identity2.Migrations
 
                     b.Property<int?>("PreguntaId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("opcionSeleccionada")
-                        .HasColumnType("bit");
 
                     b.Property<string>("tituloOpcion")
                         .IsRequired()

@@ -18,8 +18,8 @@ namespace Encuestadora_Identity2.Models
         [MaxLength(40, ErrorMessage = "El maximo permitido para el {0} es {1}")]
         public string tituloOpcion { get; set; }
 
-        [Display(Name = "Selección")]
-        public bool opcionSeleccionada { get; set; }
+        //[Display(Name = "Selección")]
+        //public bool opcionSeleccionada { get; set; }
 
         //RELACIONES CON OTRAS ENTIDADES
         //foreign key PREGUNTA

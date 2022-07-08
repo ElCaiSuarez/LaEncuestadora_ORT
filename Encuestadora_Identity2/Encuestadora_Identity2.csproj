@@ -17,6 +17,12 @@
     <Compile Remove="Migrations\20220708154617_CustomUserData1.Designer.cs" />
     <Compile Remove="Migrations\20220708154746_CustomUserData1.cs" />
     <Compile Remove="Migrations\20220708154746_CustomUserData1.Designer.cs" />
+    <Compile Remove="Migrations\20220708172228_CustomUserData1.cs" />
+    <Compile Remove="Migrations\20220708172228_CustomUserData1.Designer.cs" />
+    <Compile Remove="Migrations\20220708204216_CustomUserData1.cs" />
+    <Compile Remove="Migrations\20220708204216_CustomUserData1.Designer.cs" />
+    <Compile Remove="Migrations\20220708204600_CustomUserData1.cs" />
+    <Compile Remove="Migrations\20220708204600_CustomUserData1.Designer.cs" />
     <Compile Remove="Models\Cliente.cs" />
   </ItemGroup>
 

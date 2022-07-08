@@ -70,7 +70,7 @@ namespace Encuestadora_Identity2.Controllers
             //encuesta.ApplicationUser = ApplicationUser;
             //ViewBag.ApplicationUserId = ApplicationUser.Id;
             ViewBag.puntosEncuesta = PuntosEncuesta.ENCUESTA_GRATIS;
-            var precioCliente = PrecioCliente.CLIENTE_GRATIS;/*ApplicationUser.precioCliente;*/
+            var precioCliente = /*PrecioCliente.CLIENTE_GRATIS;*/ApplicationUser.precioCliente;
             if (precioCliente == PrecioCliente.CLIENTE_ORO)
             {
                 ViewBag.puntosEncuesta = PuntosEncuesta.ENCUESTA_ORO;
