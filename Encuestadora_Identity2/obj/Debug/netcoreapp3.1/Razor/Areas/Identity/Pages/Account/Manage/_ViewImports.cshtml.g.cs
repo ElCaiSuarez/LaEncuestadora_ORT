@@ -34,6 +34,13 @@ using Encuestadora_Identity2.Areas.Identity.Pages;
 #line hidden
 #nullable disable
 #nullable restore
+#line 5 "C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\Areas\Identity\Pages\_ViewImports.cshtml"
+using Encuestadora_Identity2.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\Areas\Identity\Pages\Account\_ViewImports.cshtml"
 using Encuestadora_Identity2.Areas.Identity.Pages.Account;
 
@@ -48,7 +55,7 @@ using Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"743c4b88ea8081ef452f2c45bf7e8de68cc191e4", @"/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"be4baebcfccc2195ff8c6d582b7dbb54ac008bde", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"229d17d8f744cecdb57470fe5e7800a396cff02d", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a0b8d476c3bf1b7cd6fada8334a10e9a069a5a3c", @"/Areas/Identity/Pages/Account/_ViewImports.cshtml")]
     public class Areas_Identity_Pages_Account_Manage__ViewImports : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {

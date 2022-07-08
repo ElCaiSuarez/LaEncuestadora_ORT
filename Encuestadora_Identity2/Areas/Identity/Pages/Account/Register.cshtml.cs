@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Encuestadora_Identity.Models;
+//AGREGADO
+using Encuestadora_Identity2.Models;
 using Microsoft.Extensions.Logging;
 
 namespace Encuestadora_Identity2.Areas.Identity.Pages.Account
@@ -20,11 +21,12 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        //MODIFICADO
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        //MODIFICADO
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -47,10 +49,16 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account
         public class InputModel
         {
             //AGREGADO
-            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Custom Tag")]
             public string CustomTag { get; set; }
+
+            //AGREGADO
+            [Required]
+            [DataType(DataType.Text)]
+            [MaxLength(80, ErrorMessage = "El maximo permitido para el {0} es {1}")]
+            [Display(Name = "Nombre Completo")]
+            public string Nombre { get; set; }
 
             [Required]
             [EmailAddress]
@@ -73,6 +81,7 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -83,7 +92,8 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account
             {
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 //AGREGADO
-                user.CustomTag = Input.CustomTag;
+                user.CustomTag = "Cliente";
+                user.Nombre = Input.Nombre;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

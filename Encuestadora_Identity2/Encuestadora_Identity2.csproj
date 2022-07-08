@@ -6,25 +6,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20220708034632_CustomUserData1.cs" />
+    <Compile Remove="Migrations\20220708034632_CustomUserData1.Designer.cs" />
+    <Compile Remove="Migrations\20220708040433_CustomUserData1.cs" />
+    <Compile Remove="Migrations\20220708040433_CustomUserData1.Designer.cs" />
+    <Compile Remove="Migrations\20220708154210_CustomUserData1.cs" />
+    <Compile Remove="Migrations\20220708154210_CustomUserData1.Designer.cs" />
+    <Compile Remove="Migrations\20220708154617_CustomUserData1.cs" />
+    <Compile Remove="Migrations\20220708154617_CustomUserData1.Designer.cs" />
     <Compile Remove="Models\Cliente.cs" />
-    <Compile Remove="Models\Encuesta.cs" />
-    <Compile Remove="Models\EncuestaRespondida.cs" />
-    <Compile Remove="Models\OpcionPregunta.cs" />
-    <Compile Remove="Models\PrecioCliente.cs" />
-    <Compile Remove="Models\Pregunta.cs" />
-    <Compile Remove="Models\PuntosEncuesta.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.23" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.25" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.25" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 
 </Project>

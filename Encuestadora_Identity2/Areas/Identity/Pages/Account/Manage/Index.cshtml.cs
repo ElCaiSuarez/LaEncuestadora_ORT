@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Encuestadora_Identity.Models;
+//AGREGADO
+using Encuestadora_Identity2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,9 +13,11 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
+        //MODIFICADO
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
+        //MODIFICADO
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
@@ -42,6 +45,13 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Custom Tag")]
             public string CustomTag { get; set; }
 
+            //AGREGADO
+            [Required]
+            [DataType(DataType.Text)]
+            [MaxLength(80, ErrorMessage = "El maximo permitido para el {0} es {1}")]
+            [Display(Name = "Nombre Completo")]
+            public string Nombre { get; set; }
+
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -55,7 +65,8 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber,
                 //AGREGADO
-                CustomTag = user.CustomTag
+                CustomTag = user.CustomTag,
+                Nombre = user.Nombre
             };
         }
 
@@ -99,6 +110,10 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
             if (Input.CustomTag != user.CustomTag)
             {
                 user.CustomTag = Input.CustomTag;
+            }
+            if (Input.Nombre != user.Nombre)
+            {
+                user.Nombre = Input.Nombre;
             }
             //AGREGADO
             await _userManager.UpdateAsync(user);

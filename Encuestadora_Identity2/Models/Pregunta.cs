@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace WebApp.NET_MVC_2022_12D_PP_Encuestadora.Models
+namespace Encuestadora_Identity2.Models
 {
     public class Pregunta
-    {   
+    {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int PreguntaId { get; set; }
+        public int PreguntaId { get; set; }
 
         [Required(ErrorMessage = "El {0} es requerido")]
         [Display(Name = "Titulo pregunta")]
         [MaxLength(40, ErrorMessage = "El maximo permitido para el {0} es {1}")]
-        public virtual string tituloPregunta { get; set; }
+        public string tituloPregunta { get; set; }
 
         ////RELACIONES CON OTRAS ENTIDADES
         ////RELACION 1 a 1 CON TipoPregunta
@@ -26,8 +26,8 @@ namespace WebApp.NET_MVC_2022_12D_PP_Encuestadora.Models
         //public TipoPregunta tipoPregunta { get; set; }
 
         //foreign key de ENCUESTA
-        public virtual int EncuestaId { get; set; }
-        //reference navigation property de ENCUESTA
+        //public int EncuestaId { get; set; }
+        ////reference navigation property de ENCUESTA
         [ForeignKey("EncuestaId")]
         public virtual Encuesta Encuesta { get; set; }
 

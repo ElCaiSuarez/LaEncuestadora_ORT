@@ -12,7 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Encuestadora_Identity.Models;
+//AGREGADO
+using Encuestadora_Identity2.Models;
 
 namespace Encuestadora_Identity2
 {
@@ -31,6 +32,8 @@ namespace Encuestadora_Identity2
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddMvc().AddN
+            //MODIFICADO
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();

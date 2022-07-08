@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebApp.NET_MVC_2022_12D_PP_Encuestadora.Models
+namespace Encuestadora_Identity2.Models
 {
     public enum PrecioCliente
     {

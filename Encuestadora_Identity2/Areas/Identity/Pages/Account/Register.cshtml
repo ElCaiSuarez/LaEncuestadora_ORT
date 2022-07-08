@@ -15,8 +15,14 @@
             @*AGREGADO*@
             <div class="form-group">
                 <label asp-for="Input.CustomTag"></label>
-                <input asp-for="Input.CustomTag" class="form-control" />
+                @*<input asp-for="Input.CustomTag" class="form-control" />*@
+                <input @*type="hidden"*@ asp-for="Input.CustomTag" class="form-control" value="Cliente" />
                 <span asp-validation-for="Input.CustomTag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Nombre"></label>
+                <input asp-for="Input.Nombre" class="form-control" />
+                <span asp-validation-for="Input.Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
