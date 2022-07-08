@@ -41,7 +41,8 @@ namespace Encuestadora_Identity2.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     CustomTag = table.Column<string>(maxLength: 80, nullable: true),
-                    Nombre = table.Column<string>(maxLength: 80, nullable: true)
+                    Nombre = table.Column<string>(maxLength: 80, nullable: true),
+                    precioCliente = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

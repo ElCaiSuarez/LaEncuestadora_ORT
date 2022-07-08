@@ -92,7 +92,7 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account
             {
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 //AGREGADO
-                user.CustomTag = "Cliente";
+                user.CustomTag = Input.CustomTag;
                 user.Nombre = Input.Nombre;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

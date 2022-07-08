@@ -32,7 +32,7 @@ namespace Encuestadora_Identity2.Controllers
             return View(await encuestadoraDBContext.ToListAsync());
         }
 
-        // GET: Encuesta/Details/5
+        //METODO DETAILS 16/06/2022 con Include y ThenInclude
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,6 +41,8 @@ namespace Encuestadora_Identity2.Controllers
             }
 
             var encuesta = await _context.encuestas
+                .Include(e => e.preguntas)
+                .ThenInclude(f => f.opciones)
                 .FirstOrDefaultAsync(m => m.EncuestaId == id);
             if (encuesta == null)
             {
@@ -64,11 +66,11 @@ namespace Encuestadora_Identity2.Controllers
             var dias = 7;
             encuesta.datetimeCreacionEncuesta = DateTime.Now;
             var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
-            //encuesta.ApplicationUser = ApplicationUser;
             encuesta.ApplicationUserId = ApplicationUser.Id;
-            ViewBag.ApplicationUserId = ApplicationUser.Id;
+            //encuesta.ApplicationUser = ApplicationUser;
+            //ViewBag.ApplicationUserId = ApplicationUser.Id;
             ViewBag.puntosEncuesta = PuntosEncuesta.ENCUESTA_GRATIS;
-            var precioCliente = PrecioCliente.CLIENTE_GRATIS;/*cliente.precioCliente;*/
+            var precioCliente = PrecioCliente.CLIENTE_GRATIS;/*ApplicationUser.precioCliente;*/
             if (precioCliente == PrecioCliente.CLIENTE_ORO)
             {
                 ViewBag.puntosEncuesta = PuntosEncuesta.ENCUESTA_ORO;
@@ -80,7 +82,6 @@ namespace Encuestadora_Identity2.Controllers
                 dias = 15;
             }
             encuesta.datetimeVencimientoEncuesta = encuesta.datetimeCreacionEncuesta.AddDays(dias);
-            //ViewData["Clientes"] = new SelectList(_context.clientes.ToList(), "ClienteId", "nombreCliente");
             return View(encuesta);
         }
 
@@ -103,7 +104,7 @@ namespace Encuestadora_Identity2.Controllers
         }
 
         // GET: Encuesta/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, string userName)
         {
             if (id == null)
             {
@@ -115,6 +116,8 @@ namespace Encuestadora_Identity2.Controllers
             {
                 return NotFound();
             }
+            var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
+            encuesta.ApplicationUserId = ApplicationUser.Id;
             return View(encuesta);
         }
 
@@ -123,12 +126,12 @@ namespace Encuestadora_Identity2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EncuestaId,tituloEncuesta,datetimeCreacionEncuesta,datetimeVencimientoEncuesta,puntosEncuesta")] Encuesta encuesta)
+        public async Task<IActionResult> Edit(/*int id, */[Bind("EncuestaId,tituloEncuesta,datetimeCreacionEncuesta,datetimeVencimientoEncuesta,puntosEncuesta,ApplicationUserId")] Encuesta encuesta)
         {
-            if (id != encuesta.EncuestaId)
-            {
-                return NotFound();
-            }
+            //if (id != encuesta.EncuestaId)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
@@ -148,7 +151,7 @@ namespace Encuestadora_Identity2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Encuesta", new { id = encuesta.EncuestaId });
             }
             return View(encuesta);
         }
@@ -177,9 +180,10 @@ namespace Encuestadora_Identity2.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var encuesta = await _context.encuestas.FindAsync(id);
+            var ApplicationUser = _context.usuarios.Single(i => i.Id == encuesta.ApplicationUserId);
             _context.encuestas.Remove(encuesta);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Encuesta", new { userName = ApplicationUser.UserName });
         }
 
         private bool EncuestaExists(int id)

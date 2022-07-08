@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Encuestadora_Identity2.Models.Encuesta>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Encuestas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Mis Encuestas</h1>
 
 <p>
     @*<a asp-action="Create">Create New</a>
@@ -46,9 +46,9 @@
                 @Html.DisplayFor(modelItem => item.puntosEncuesta)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.EncuestaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EncuestaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EncuestaId">Delete</a>
+                <a href="/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.EncuestaId">Ver</a> |
+                <a asp-action="Delete" asp-route-id="@item.EncuestaId">Borrar</a>
             </td>
         </tr>
 }

@@ -1,11 +1,11 @@
 ﻿@model Encuestadora_Identity2.Models.Encuesta
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
 <h4>Encuesta</h4>
 <hr />
@@ -37,20 +37,20 @@
                 <span asp-validation-for="puntosEncuesta" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ApplicationUserId" class="control-label"></label>
-                <b>@Html.DisplayFor(model => model.ApplicationUserId)</b>
+                @*<label asp-for="ApplicationUserId" class="control-label"></label>
+                <b>@Html.DisplayFor(model => model.ApplicationUserId)</b>*@
                 <input type="hidden" asp-for="ApplicationUserId" class="form-control"/>
                 <span asp-validation-for="ApplicationUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn-link" href="/Encuesta?userName=@User.Identity.Name">Volver a Mis Encuestas</a>
 </div>
 
 @section Scripts {

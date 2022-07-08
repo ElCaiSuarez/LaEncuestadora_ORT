@@ -79,6 +79,9 @@ namespace Encuestadora_Identity2.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<int>("precioCliente")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -342,8 +345,8 @@ namespace Encuestadora_Identity2.Migrations
 
             modelBuilder.Entity("Encuestadora_Identity2.Models.Encuesta", b =>
                 {
-                    b.HasOne("Encuestadora_Identity2.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                    b.HasOne("Encuestadora_Identity2.Models.ApplicationUser", null)
+                        .WithMany("encuestas")
                         .HasForeignKey("ApplicationUserId");
                 });
 
