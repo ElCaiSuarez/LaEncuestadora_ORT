@@ -18,6 +18,7 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
         //MODIFICADO
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        //AGREGADO
         private readonly ApplicationDbContext _context;
 
         //MODIFICADO
@@ -28,6 +29,7 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            //AGREGADO
             _context = context;
         }
 
@@ -85,6 +87,7 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            //AGREGADO
             var usuario = _context.usuarios.Single(u => u.UserName == user.UserName);
             ViewData["PuntosAcumulados"] = usuario.puntosAcumulados;
             ViewData["CustomTag"] = usuario.CustomTag;

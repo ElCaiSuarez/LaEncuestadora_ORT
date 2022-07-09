@@ -2,7 +2,7 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Registrarse";
-    
+    //AGREGADO
     var usuario = "Usuario";
     var cliente = "Cliente";
 
@@ -16,6 +16,7 @@
             <h4 id="mensajeCustomTag">Crear una cuenta.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
+            @*MODIFICADO*@
             <div class="form-group">
                 <label asp-for="Input.CustomTag">Tipo de Registro</label>
                 <select asp-for="Input.CustomTag" class="form-control">

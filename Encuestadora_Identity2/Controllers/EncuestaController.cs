@@ -31,6 +31,15 @@ namespace Encuestadora_Identity2.Controllers
             var encuestadoraDBContext = _context.encuestas.Include(e => e.preguntas).Where(e => e.ApplicationUserId == ApplicationUser.Id);
             return View(await encuestadoraDBContext.ToListAsync());
         }
+        
+        //AGREGADO
+        public async Task<IActionResult> Disponible(string userName)
+        {
+            var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
+            var encuestadoraDBContext = _context.encuestas.Include(e => e.preguntas).ThenInclude(e => e.opciones).Where(e => e.datetimeVencimientoEncuesta > DateTime.Now).OrderByDescending(e => e.puntosEncuesta);
+            ViewBag.ApplicationUserId = ApplicationUser.Id;
+            return View(await encuestadoraDBContext.ToListAsync());
+        }
 
         //METODO DETAILS 16/06/2022 con Include y ThenInclude
         public async Task<IActionResult> Details(int? id)

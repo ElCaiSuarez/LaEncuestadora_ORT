@@ -20,7 +20,13 @@
     }
     else if (usuario.CustomTag == "Usuario")
     {
-        <li class="nav-item"><a class="nav-link" href="/Encuesta/Disponible?userName=@User.Identity.Name">Responder Encuestas</a></li>
+        <li class="nav-item"><a class="nav-link" href="" onclick="canjear()">Canjear Puntos</a></li>
+        <li class="nav-item">
+            <button type="button" onclick="window.open('/Encuesta/Disponible?userName=@User.Identity.Name', '_self');" class="btn btn-warning nav-item">Responder Encuestas</button>
+        </li>
+        @*<li class="nav-item">
+            <button type="button" onclick="canjear()" class="btn btn-warning nav-item">Canjear Puntos</button>
+        </li>*@
     }
 
     @*@if (hasExternalLogins)

@@ -33,30 +33,46 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.tituloEncuesta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.datetimeCreacionEncuesta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.datetimeVencimientoEncuesta)
-            </td>
-            <th>
-                @*AGREGAR preguntas.count*@
-                @item.preguntas.Count
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.puntosEncuesta)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.EncuestaId">Ver</a> |
-                <a href="/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.EncuestaId">Borrar</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tituloEncuesta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datetimeCreacionEncuesta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datetimeVencimientoEncuesta)
+                </td>
+                <th>
+                    @*AGREGAR preguntas.count*@
+                    @item.preguntas.Count
+                </th>
+                @if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_ORO)
+                {
+                    <td class="bg-warning font-weight-bold">
+                        @Html.DisplayFor(modelItem => item.puntosEncuesta)
+                    </td>
+                }
+                else if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_PLATA)
+                {
+                    <td class="bg-secondary text-white">
+                        @Html.DisplayFor(modelItem => item.puntosEncuesta)
+                    </td>
+                }
+                else
+                {
+                    <td class="bg-primary">
+                        @Html.DisplayFor(modelItem => item.puntosEncuesta)
+                    </td>
+                }
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.EncuestaId">Ver</a> |
+                    <a href="/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EncuestaId">Borrar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
