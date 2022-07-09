@@ -40,7 +40,10 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="EncuestaId" />
-        <input type="submit" value="Borrar" class="btn btn-danger" /> |
-        <a class="btn-link" href="/Encuesta?userName=@User.Identity.Name">Volver a Encuestas</a>
+        <input type="submit" value="Borrar" class="btn btn-danger" />
+        
     </form>
+</div>
+<div>
+    <a class="btn-link" href="/Encuesta?userName=@User.Identity.Name">Volver a Mis Encuestas</a>
 </div>

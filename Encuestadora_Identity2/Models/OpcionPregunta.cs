@@ -23,7 +23,7 @@ namespace Encuestadora_Identity2.Models
 
         //RELACIONES CON OTRAS ENTIDADES
         //foreign key PREGUNTA
-        //public int PreguntaId { get; set; }
+        public int PreguntaId { get; set; }
         //reference navigation property de PREGUNTA
         [ForeignKey("PreguntaId")]
         public virtual Pregunta Pregunta { get; set; }

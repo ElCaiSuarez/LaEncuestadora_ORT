@@ -17,27 +17,35 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.tituloEncuesta)
         </dd>*@
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.datetimeCreacionEncuesta)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.datetimeCreacionEncuesta)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.datetimeVencimientoEncuesta)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.datetimeVencimientoEncuesta)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.puntosEncuesta)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.puntosEncuesta)
         </dd>
+        <dt class="col-sm-2">
+            <b>Preguntas</b>
+        </dt>
+        <dt class="col-sm-2">
+            @*AGREGAR preguntas.count*@
+            Preguntas
+        </dt>
     </dl>
 </div>
 <div>
-    <a href="/Encuesta/Edit?id=@Model.EncuestaId&userName=@User.Identity.Name">Editar</a> |
+    <a class="btn-link" href="/Encuesta/Edit?id=@Model.EncuestaId&userName=@User.Identity.Name">Editar</a> |
+    <a class="btn-link" href="/Pregunta?EncuestaId=@Model.EncuestaId">Ver Preguntas</a> |
     <a class="btn-link" href="/Encuesta?userName=@User.Identity.Name">Volver a Mis Encuestas</a>
 </div>

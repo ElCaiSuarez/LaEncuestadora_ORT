@@ -1,0 +1,33 @@
+﻿@model Encuestadora_Identity2.Models.Pregunta
+
+@{
+    ViewData["Title"] = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.tituloPregunta)</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.tituloPregunta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.tituloPregunta)
+        </dd>
+        <dt class="col-sm-2">
+            <b>Opciones</b>
+        </dt>
+        <dt class="col-sm-2">
+            @*AGREGAR preguntas.count*@
+            Opciones
+        </dt>
+    </dl>
+</div>
+<div>
+    <a class="btn-link" href="/Pregunta/Edit?id=@Model.PreguntaId&EncuestaId=@Model.EncuestaId">Editar</a> |
+    <a class="btn-link" href="/Opcion?PreguntaId=@Model.PreguntaId">Ver Opciones</a> |
+    <a class="btn-link" href="/Pregunta?EncuestaId=@Model.EncuestaId">Volver a Mis Preguntas</a>
+</div>

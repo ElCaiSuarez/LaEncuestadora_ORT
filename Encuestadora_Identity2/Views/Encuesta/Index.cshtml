@@ -8,9 +8,8 @@
 <h1>Mis Encuestas</h1>
 
 <p>
-    @*<a asp-action="Create">Create New</a>
-    <a class="nav-link text-dark" asp-controller="Encuesta" asp-action="Create" asp-page="/Encuesta/Manage/Index" title="Manage">Hola @User.Identity.Name!</a>*@
-    <a href="/Encuesta/Create?userName=@User.Identity.Name">Crear Encuesta</a>
+    <a class="btn-link" href="/Encuesta/Create?userName=@User.Identity.Name">Crear Encuesta</a> |
+    <a class="btn-link" href="/Identity/Account/Manage">Volver a Mi Perfil</a>
 </p>
 <table class="table">
     <thead>
@@ -23,6 +22,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.datetimeVencimientoEncuesta)
+            </th>
+            <th>
+                <b>Preguntas</b>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.puntosEncuesta)
@@ -42,12 +44,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.datetimeVencimientoEncuesta)
             </td>
+            <th>
+                @*AGREGAR preguntas.count*@
+                Preguntas
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.puntosEncuesta)
             </td>
             <td>
-                <a href="/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name">Editar</a> |
                 <a asp-action="Details" asp-route-id="@item.EncuestaId">Ver</a> |
+                <a href="/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name">Editar</a> |
                 <a asp-action="Delete" asp-route-id="@item.EncuestaId">Borrar</a>
             </td>
         </tr>

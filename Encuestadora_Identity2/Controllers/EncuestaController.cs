@@ -99,7 +99,7 @@ namespace Encuestadora_Identity2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Details", "Encuesta", new { id = encuesta.EncuestaId });
             }
-            //ViewBag.cliente = encuesta.Cliente;
+            ViewBag.cliente = _context.usuarios.Single(i => i.Id == encuesta.ApplicationUserId);
             return View(encuesta);
         }
 

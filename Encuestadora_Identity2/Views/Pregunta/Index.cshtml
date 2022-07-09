@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Encuestadora_Identity2.Models.Pregunta>
+
+@{
+    ViewData["Title"] = "Preguntas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Mis Preguntas de @ViewBag.Encuesta.tituloEncuesta</h1>
+
+<p>
+    <a class="btn-link" href="/Pregunta/Create?EncuestaId=@ViewBag.Encuesta.EncuestaId">Crear Pregunta</a> |
+    <a class="btn-link" href="/Encuesta?userName=@User.Identity.Name">Volver a Mis Encuestas</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tituloPregunta)
+            </th>
+            <th>
+                <b>Opciones</b>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tituloPregunta)
+            </td>
+            <th>
+                @*AGREGAR opciones.count*@
+                Opciones
+            </th>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.PreguntaId">Ver</a> |
+                <a class="btn-link" href="/Pregunta/Edit?id=@item.PreguntaId&EncuestaId=@item.EncuestaId">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.PreguntaId">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
