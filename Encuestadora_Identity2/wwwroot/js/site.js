@@ -7,6 +7,10 @@ function cambioCustomTag() {
     //var mensajeCustomTag = document.getElementById("mensajeCustomTag");
     //mensajeCustomTag.value = "Crear una cuenta de Cliente.";
     var customTag = document.getElementById("CustomTag");
-    customTag.value = "Cliente";
-    alert("Ya puede crear su cuenta de Cliente")
+    alert(customTag);
+    //customTag.value = "Cliente";
+    //alert("Ya puede crear su cuenta de Cliente")
+}
+function canjear() {
+    alert("Puntos Canjeados...")
 }

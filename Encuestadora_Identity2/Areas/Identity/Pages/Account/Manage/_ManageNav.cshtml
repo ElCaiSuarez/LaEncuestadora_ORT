@@ -1,15 +1,28 @@
 ﻿@*MODIFICADO*@
 @using Encuestadora_Identity2.Models;
+@using Encuestadora_Identity2.Data;
 @inject SignInManager<ApplicationUser> SignInManager
+@*AGREGADO*@
+@inject ApplicationDbContext context
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var _context = context;
+    var usuario = _context.usuarios.Single(u => u.UserName == @User.Identity.Name);
 }
 <ul class="nav nav-pills flex-column">
     <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Perfil</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Correo</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Contraseña</a></li>
-    @*<li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Encuesta">Encuestas</a></li>*@
-    <li class="nav-item"><a class="nav-link" href="/Encuesta?userName=@User.Identity.Name">Mis Encuestas</a></li>
+    @*AGREGADO*@
+    @if (usuario.CustomTag == "Cliente")
+    {
+        <li class="nav-item"><a class="nav-link" href="/Encuesta?userName=@User.Identity.Name">Mis Encuestas</a></li>
+    }
+    else if (usuario.CustomTag == "Usuario")
+    {
+        <li class="nav-item"><a class="nav-link" href="/Encuesta/Disponible?userName=@User.Identity.Name">Responder Encuestas</a></li>
+    }
+
     @*@if (hasExternalLogins)
         {
             <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>

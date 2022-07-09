@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Encuestadora_Identity2.Data;
 //AGREGADO
 using Encuestadora_Identity2.Models;
 using Microsoft.AspNetCore.Identity;
@@ -13,17 +14,21 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
+        
         //MODIFICADO
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
 
         //MODIFICADO
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         public string Username { get; set; }
@@ -49,7 +54,7 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
             [Required]
             [DataType(DataType.Text)]
             [MaxLength(80, ErrorMessage = "El maximo permitido para el {0} es {1}")]
-            [Display(Name = "Nombre Completo")]
+            [Display(Name = "Nombre completo")]
             public string Nombre { get; set; }
 
             //AGREGADO
@@ -80,7 +85,9 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
-            //ViewData["CustomTag"] = user.CustomTag;
+            var usuario = _context.usuarios.Single(u => u.UserName == user.UserName);
+            ViewData["PuntosAcumulados"] = usuario.puntosAcumulados;
+            ViewData["CustomTag"] = usuario.CustomTag;
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");

@@ -22,9 +22,10 @@ namespace Encuestadora_Identity2.Controllers
         // GET: Pregunta
         public async Task<IActionResult> Index(int EncuestaId)
         {
-            var encuestadoraDBContext = _context.preguntas.Include(p => p.Encuesta);
+            //var encuestadoraDBContext = _context.preguntas.Include(p => p.Encuesta);
             ViewBag.Encuesta = _context.encuestas.Single(e => e.EncuestaId == EncuestaId);
-            return View(await _context.preguntas.Where(p => p.Encuesta.EncuestaId == EncuestaId).ToListAsync());
+            var encuestadoraDBContext = _context.preguntas.Include(e => e.opciones).Where(e => e.EncuestaId == EncuestaId);
+            return View(await encuestadoraDBContext.ToListAsync());
         }
 
         // GET: Pregunta/Details/5
@@ -36,6 +37,7 @@ namespace Encuestadora_Identity2.Controllers
             }
 
             var pregunta = await _context.preguntas
+                .Include(e => e.opciones)
                 .FirstOrDefaultAsync(m => m.PreguntaId == id);
             if (pregunta == null)
             {

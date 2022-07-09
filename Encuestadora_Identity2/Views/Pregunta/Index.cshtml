@@ -18,7 +18,7 @@
                 @Html.DisplayNameFor(model => model.tituloPregunta)
             </th>
             <th>
-                <b>Opciones</b>
+                Opciones
             </th>
             <th></th>
         </tr>
@@ -31,7 +31,7 @@
             </td>
             <th>
                 @*AGREGAR opciones.count*@
-                Opciones
+                @item.opciones.Count
             </th>
             <td>
                 <a asp-action="Details" asp-route-id="@item.PreguntaId">Ver</a> |

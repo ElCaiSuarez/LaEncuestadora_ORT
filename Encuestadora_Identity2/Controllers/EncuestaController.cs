@@ -28,7 +28,7 @@ namespace Encuestadora_Identity2.Controllers
         public async Task<IActionResult> Index(string userName)
         {
             var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
-            var encuestadoraDBContext = _context.encuestas.Where(e => e.ApplicationUserId == ApplicationUser.Id);
+            var encuestadoraDBContext = _context.encuestas.Include(e => e.preguntas).Where(e => e.ApplicationUserId == ApplicationUser.Id);
             return View(await encuestadoraDBContext.ToListAsync());
         }
 

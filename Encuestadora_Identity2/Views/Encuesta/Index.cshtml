@@ -24,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.datetimeVencimientoEncuesta)
             </th>
             <th>
-                <b>Preguntas</b>
+                Preguntas
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.puntosEncuesta)
@@ -46,7 +46,7 @@
             </td>
             <th>
                 @*AGREGAR preguntas.count*@
-                Preguntas
+                @item.preguntas.Count
             </th>
             <td>
                 @Html.DisplayFor(modelItem => item.puntosEncuesta)

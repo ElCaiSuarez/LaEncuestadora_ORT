@@ -57,7 +57,7 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Text)]
             [MaxLength(80, ErrorMessage = "El maximo permitido para el {0} es {1}")]
-            [Display(Name = "Nombre Completo")]
+            [Display(Name = "Nombre completo")]
             public string Nombre { get; set; }
 
             [Required]
