@@ -119,7 +119,7 @@ namespace Encuestadora_Identity2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "Pregunta", new { id = pregunta.PreguntaId, EncuestaId = pregunta.EncuestaId });
+                return RedirectToAction("Details", "Pregunta", new { id = pregunta.PreguntaId });
             }
             ViewBag.EncuestaId = pregunta.EncuestaId;
             return View(pregunta);
@@ -134,6 +134,7 @@ namespace Encuestadora_Identity2.Controllers
             }
 
             var pregunta = await _context.preguntas
+                .Include(o => o.Encuesta)
                 .FirstOrDefaultAsync(m => m.PreguntaId == id);
             if (pregunta == null)
             {
