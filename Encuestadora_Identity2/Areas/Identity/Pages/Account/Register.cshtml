@@ -8,7 +8,7 @@
 
 }
 
-<h1>@ViewData["Title"]</h1>
+
 
 <div class="row">
     <div class="col-md-4">
@@ -18,8 +18,8 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             @*MODIFICADO*@
             <div class="form-group">
-                <label asp-for="Input.CustomTag">Tipo de Registro</label>
-                <select asp-for="Input.CustomTag" class="form-control">
+                <label asp-for="Input.CustomTag">Tipo de registro</label>
+                <select asp-for="Input.CustomTag" class="form-control" id="CustomTag">
                     <option label="@usuario" value="@usuario"></option>
                     <option label="@cliente" value="@cliente"></option>
                 </select>
@@ -48,16 +48,17 @@
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
     </div>
-    @*<div class="col-md-6 col-md-offset-2">
+    <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Registrese en La Encuestadora.</h4>
+            <h4>Comience a ganar dinero desde donde usted quiera!.</h4>
             <hr />
-           AGREGAR UNA IMAGEN
+            <img class="col-icon img-fluid" alt="Registrese en La Encuestadora" src="/img/imagen5.jpeg">
+            
         </section>
-    </div>*@
+    </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    
+
 }
