@@ -14,9 +14,12 @@
     <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Correo</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Contraseña</a></li>
     @*AGREGADO*@
-    @if (usuario.CustomTag == "Cliente")
+    @*@if (usuario.CustomTag == "Cliente")
     {
-        <li class="nav-item"><a class="nav-link" href="/Encuesta?userName=@User.Identity.Name">Mis Encuestas</a></li>
+        
+        <li class="nav-item">
+            <button type="button" onclick="window.open('/Encuesta?userName=@User.Identity.Name', '_self');" class="btn btn-warning nav-item">Mis Encuestas</button>
+        </li>
     }
     else if (usuario.CustomTag == "Usuario")
     {
@@ -24,10 +27,8 @@
         <li class="nav-item">
             <button type="button" onclick="window.open('/Encuesta/Disponible?userName=@User.Identity.Name', '_self');" class="btn btn-warning nav-item">Responder Encuestas</button>
         </li>
-        @*<li class="nav-item">
-            <button type="button" onclick="canjear()" class="btn btn-warning nav-item">Canjear Puntos</button>
-        </li>*@
-    }
+
+    }*@
 
     @*@if (hasExternalLogins)
         {

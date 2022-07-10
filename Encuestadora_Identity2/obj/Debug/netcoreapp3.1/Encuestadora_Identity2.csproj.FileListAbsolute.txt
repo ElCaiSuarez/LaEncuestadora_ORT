@@ -189,3 +189,12 @@ C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Iden
 C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\OpcionPregunta\Edit.cshtml.g.cs
 C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\OpcionPregunta\Index.cshtml.g.cs
 C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\Encuesta\Disponible.cshtml.g.cs
+C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\EncuestaRespondida\Create.cshtml.g.cs
+C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\EncuestaRespondida\Delete.cshtml.g.cs
+C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\EncuestaRespondida\Details.cshtml.g.cs
+C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\EncuestaRespondida\Edit.cshtml.g.cs
+C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\EncuestaRespondida\Index.cshtml.g.cs
+C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\EncuestaRespondida\ResponderPreguntas.cshtml.g.cs
+C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\EncuestaRespondida\Resultado.cshtml.g.cs
+C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
+C:\Users\sj011105\source\repos\Solucion_Encuestadora_Identity2\Encuestadora_Identity2\obj\Debug\netcoreapp3.1\Razor\Views\Home\Faqs.cshtml.g.cs

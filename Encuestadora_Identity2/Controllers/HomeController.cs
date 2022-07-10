@@ -23,6 +23,16 @@ namespace Encuestadora_Identity2.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Faqs()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

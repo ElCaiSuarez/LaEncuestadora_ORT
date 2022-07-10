@@ -33,11 +33,12 @@ namespace Encuestadora_Identity2.Controllers
         }
         
         //AGREGADO
-        public async Task<IActionResult> Disponible(string userName)
+        public async Task<IActionResult> Disponible(string userName, bool? esEncuestaRespondida)
         {
             var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
             var encuestadoraDBContext = _context.encuestas.Include(e => e.preguntas).ThenInclude(e => e.opciones).Where(e => e.datetimeVencimientoEncuesta > DateTime.Now).OrderByDescending(e => e.puntosEncuesta);
             ViewBag.ApplicationUserId = ApplicationUser.Id;
+            ViewBag.esEncuestaRespondida = esEncuestaRespondida;
             return View(await encuestadoraDBContext.ToListAsync());
         }
 
