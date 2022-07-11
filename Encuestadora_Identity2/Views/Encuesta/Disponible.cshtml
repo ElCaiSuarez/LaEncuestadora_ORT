@@ -5,20 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Encuestas Disponibles</h1>
+<div class="container-fluid">
+    <div class="row justify-content-start align-items-center">
+        <div class="col-6 col-sm-6">
+            <h1>Encuestas Disponibles</h1>
+        </div>
+        <div hidden id="mensaje" class="btn btn-danger text-center active"></div>
+    </div>
+</div>
 
 <p>
     @*<a class="btn-link" href="/Identity/Account/Manage">Volver a Mi Perfil</a>*@
-    <button type="button" onclick="window.open('/Identity/Account/Manage', '_self');" class="btn btn-secondary">Ver Mi Perfil</button>
+    <button title="Ir al Perfil" type="button" onclick="window.open('/Identity/Account/Manage', '_self');" class="btn btn-light"><img src="/img/icono_perfil.svg" class="img-fluid" alt="Crear" /></button>
 </p>
 
 <div class="container-fluid">
     <section class="row justify-content-start align-items-center">
-        <table>
-            <thead class="btn btn-primary col-12 col-sm-12">
+        <table class="table-responsive">
+            <thead class="btn btn-success col-12 col-sm-12">
                 <tr class="col-12 col-sm-12" style="display:inline-table">
                     <th class="col-2 col-sm-2 text-center">
-                        Nombre
+                        Encuesta
                     </th>
                     <th class="col-2  col-sm-2 text-center">
                         Publicacion
@@ -30,7 +37,7 @@
                         Preguntas
                     </th>
                     <th class="col-2  col-sm-2 text-center">
-                        Puntos
+                        Tipo
                     </th>
                     <th class="col-2  col-sm-2 text-center"></th>
                 </tr>
@@ -78,13 +85,13 @@
                                 @if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_ORO)
                                 {
                                     <td class="col-2 col-sm-2 text-center">
-                                        <p class="btn btn-warning text-black-50 font-weight-bold" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
+                                        <p class="btn btn-warning text-black-50 font-weight-bold active" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
                                     </td>
                                 }
                                 else if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_PLATA)
                                 {
                                     <td class="col-2 col-sm-2 text-center">
-                                        <p class="btn btn-secondary" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
+                                        <p class="btn btn-secondary active" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
                                     </td>
                                 }
                                 else
@@ -94,12 +101,11 @@
                                     </td>
                                 }
                                 <td class="col-2 col-sm-2 text-center">
-                                    @*<a class="text-white-50" href="/EncuestaRespondida/ResponderPreguntas?EncuestaId=@item.EncuestaId&&userName=@User.Identity.Name">Responder</a>*@
-                                    <button type="button" onclick="window.open('/EncuestaRespondida/ResponderPreguntas?EncuestaId=@item.EncuestaId&&userName=@User.Identity.Name', '_self');" class="btn btn-primary">Responder</button>
+                                    <button title="Responder" type="button" onclick="window.open('/EncuestaRespondida/ResponderPreguntas?EncuestaId=@item.EncuestaId&&userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_responder.svg" class="img-fluid" alt="Ver" /></button>
+
                                 </td>
                             </tr>
                         }
-
                     }
                 }
             </tbody>
@@ -107,14 +113,11 @@
     </section>
 </div>
 
-<p hidden id="mensaje" class="btn btn-danger text-center col-4 active"></p>
-
 @if (ViewBag.esEncuestaRespondida != null)
 {
     if (ViewBag.esEncuestaRespondida)
     {
         <script>
-            /*alert("La encuesta ya fue respondida por el Usuario ");*/
             var mensaje = document.getElementById('mensaje');
             mensaje.removeAttribute("hidden");
             mensaje.innerHTML = "Encuesta respondida, gracias! "

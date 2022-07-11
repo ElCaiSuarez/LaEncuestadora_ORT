@@ -5,54 +5,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Resultado de @ViewData["CurrentFilter"]</h1>
+<h3>Resultado</h3>
 
 <p>
-    <button type="button" onclick="window.open('/Encuesta?userName=@User.Identity.Name', '_self');" class="btn btn-secondary">Volver a Mis Encuestas</button>
+    <button title="Mis Encuestas" type="button" onclick="window.open('/Encuesta?userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_atras.svg" class="img-fluid" alt="Atras" /></button>
 </p>
 <div id="container"></div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.datetimeRespuestaEncuesta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.pregunta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.opcionPregunta)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.datetimeRespuestaEncuesta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.pregunta.tituloPregunta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.opcionPregunta.tituloOpcion)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container-fluid">
+    <section class="row justify-content-start align-items-center">
+        <table class="table-responsive">
+            <thead class="btn btn-success col-12 col-sm-12">
+                <tr class="col-12 col-sm-12" style="display:inline-table">
+                    <th class="col-4 col-sm-4 text-center">
+                        @Html.DisplayNameFor(model => model.datetimeRespuestaEncuesta)
+                    </th>
+                    <th class="col-4 col-sm-4 text-center">
+                        @Html.DisplayNameFor(model => model.pregunta)
+                    </th>
+                    <th class="col-4 col-sm-4 text-center">
+                        @Html.DisplayNameFor(model => model.opcionPregunta)
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="btn bg-light col-12 col-sm-12">
+                @foreach (var item in Model)
+                {
+                    <tr class="col-12 col-sm-12" style="display:inline-table">
+                        <td class="col-4 col-sm-4 text-center">
+                            @Html.DisplayFor(modelItem => item.datetimeRespuestaEncuesta)
+                        </td>
+                        <td class="col-4 col-sm-4 text-center">
+                            @Html.DisplayFor(modelItem => item.pregunta.tituloPregunta)
+                        </td>
+                        <td class="col-4 col-sm-4 text-center">
+                            @Html.DisplayFor(modelItem => item.opcionPregunta.tituloOpcion)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</div>
 
 
 
-@section Scripts{
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script>
+        @section Scripts{
+            <script src="https://code.highcharts.com/highcharts.js"></script>
+            <script src="https://code.highcharts.com/modules/exporting.js"></script>
+            <script src="https://code.highcharts.com/modules/export-data.js"></script>
+            <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script>
         Highcharts.chart('container', {
             chart: {
                 type: 'column'
@@ -61,7 +64,7 @@
                 text: 'Resultado de @ViewData["CurrentFilter"]'
             },
             xAxis: {
-                categories: ['Pregunta 1', 'Pregunta 2', 'Pregunta 3']
+                categories: ['Pregunta Encuesta Vencida PLATA 1', 'Pregunta Encuesta Vencida PLATA 2', 'Pregunta Encuesta Vencida PLATA 3']
             },
             yAxis: {
                 min: 0,
@@ -109,18 +112,18 @@
                 data: [1, 0, 0]
             }, {
                 name: 'Opcion 2',
-                data: [1, 2, 1]
+                data: [2, 1, 0]
             }, {
                 name: 'Opcion 3',
-                data: [0, 0, 0]
+                data: [0, 2, 1]
             }, {
                 name: 'Opcion 4',
-                data: [0, 0, 1]
+                data: [0, 0, 2]
             }]
         });
 
-    </script>
-}
+            </script>
+        }
 
 
 
