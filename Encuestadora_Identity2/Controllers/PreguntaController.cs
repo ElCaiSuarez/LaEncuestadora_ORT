@@ -121,7 +121,7 @@ namespace Encuestadora_Identity2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "Pregunta", new { id = pregunta.PreguntaId });
+                return RedirectToAction("Index", "Pregunta", new { EncuestaId = pregunta.EncuestaId });
             }
             ViewBag.EncuestaId = pregunta.EncuestaId;
             return View(pregunta);

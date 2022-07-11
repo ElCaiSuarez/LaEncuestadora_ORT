@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Borrar</h1>
-
-<h3>@Html.DisplayFor(model => model.tituloOpcion)</h3>
+<h4>Usted esta seguro de borrar @Html.DisplayFor(model => model.tituloOpcion)?</h4>
+<hr />
+<p>
+    <button title="Mis Opciones" type="button" onclick="window.open('/OpcionPregunta?PreguntaId=@Model.PreguntaId', '_self');" class="btn btn-light"><img src="/img/icono_atras.svg" class="img-fluid" alt="Atras" /></button>
+</p>
 <div>
-    <h4>Usted esta seguro?</h4>
-    <hr />
     <dl class="row">
         @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.tituloOpcion)
@@ -28,9 +28,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="OpcionPreguntaId" />
-        <input type="submit" value="Borrar" class="btn btn-danger" />
+        <input type="submit" value="Borrar Opcion" class="btn btn-success" />
     </form>
 </div>
-<div>
-    <a class="btn-link" href="/OpcionPregunta?PreguntaId=@Model.PreguntaId">Volver a Mis Opciones</a>
-</div>        
+   

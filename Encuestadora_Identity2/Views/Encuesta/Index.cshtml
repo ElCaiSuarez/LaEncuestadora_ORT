@@ -5,11 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var darAviso = false;
 }
-
-<h1>Mis Encuestas</h1>
+<div class="container-fluid">
+    <div class="row justify-content-start align-items-center">
+        <div class="col-6 col-sm-6">
+            <h1>Mis Encuestas</h1>
+        </div>
+        <div hidden id="mensaje" class="btn btn-danger text-center active"></div>
+    </div>
+</div>
 
 <p>
-    <button title="Crear" type="button" onclick="window.open('/Encuesta/Create?userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_crear.svg" class="img-fluid" alt="Crear" /></button>
+    <button title="Crear Encuesta" type="button" onclick="window.open('/Encuesta/Create?userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_crear.svg" class="img-fluid" alt="Crear" /></button>
 </p>
 <div class="container-fluid">
     <section class="row justify-content-start align-items-center">
@@ -49,10 +55,15 @@
                         </td>
                         <td class="col-2 col-sm-2 text-center">
                             @*AGREGAR preguntas.count*@
-                            @item.preguntas.Count
+
                             @if (@item.preguntas.Count == 0)
                             {
                                 darAviso = true;
+                                <div class="mensaje2 btn btn-sm active">@item.preguntas.Count</div>
+                            }
+                            else
+                            {
+                                @item.preguntas.Count
                             }
                             <button title="Ver Preguntas" type="button" onclick="window.open('/Pregunta?EncuestaId=@item.EncuestaId', '_self');" class="btn btn-light"><img src="/img/icono_ver.svg" class="img-fluid" alt="Ver" /></button>
                         </td>
@@ -76,7 +87,6 @@
                         }
                     </tr>
                     <tr class="col-12 col-sm-12" style="display:inline-table">
-                        <td class="col-1 col-sm-1"></td>
                         @if (item.datetimeVencimientoEncuesta < DateTime.Now)
                         {
 
@@ -90,8 +100,8 @@
 
                             <td style="text-align-last: start;">
                                 <button title="Ver Encuesta" type="button" onclick="window.open('/Encuesta/Details/@item.EncuestaId', '_self');" class="btn btn-light"><img src="/img/icono_ver.svg" class="img-fluid" alt="Ver" /></button>
-                                <button title="Editar" type="button" onclick="window.open('/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_editar.svg" class="img-fluid" alt="Editar" /></button>
-                                <button title="Borrar" type="button" onclick="window.open('/Encuesta/Delete/@item.EncuestaId', '_self');" class="btn btn-light"><img src="/img/icono_borrar.svg" class="img-fluid" alt="Borrar" /></button>
+                                <button title="Editar Encuesta" type="button" onclick="window.open('/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_editar.svg" class="img-fluid" alt="Editar" /></button>
+                                <button title="Borrar Encuesta" type="button" onclick="window.open('/Encuesta/Delete/@item.EncuestaId', '_self');" class="btn btn-light"><img src="/img/icono_borrar.svg" class="img-fluid" alt="Borrar" /></button>
                             </td>
                         }
                     </tr>
@@ -100,15 +110,19 @@
         </table>
     </section>
 </div>
-<p hidden id="mensaje" class="btn btn-danger text-center col-4 active"></p>
+@*<p hidden id="mensaje" class="btn btn-danger text-center col-4 active"></p>*@
 
 @if (darAviso)
 {
-    <script>
-        var mensaje = document.getElementById('mensaje');
-        mensaje.removeAttribute("hidden");
-        mensaje.innerHTML = "CUIDADO: Tiene encuestas sin preguntas!"
-    </script>
+<script>
+    var mensaje = document.getElementById('mensaje');
+    mensaje.removeAttribute("hidden");
+    mensaje.innerHTML = "ERROR: Tiene encuestas sin preguntas y no seran publicadas!"
+    const mensajes2 = document.getElementsByClassName("mensaje2");
+    for (let i = 0; i < mensajes2.length; i++) {
+        mensajes2[i].style.cssText = "font-size:20px;color:red;";
+    }
+</script>
 
 }
 

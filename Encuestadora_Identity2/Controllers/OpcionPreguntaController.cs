@@ -123,7 +123,7 @@ namespace Encuestadora_Identity2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", "OpcionPregunta", new { id = opcionPregunta.OpcionPreguntaId });
+                return RedirectToAction("Index", "OpcionPregunta", new { PreguntaId = opcionPregunta.PreguntaId });
             }
             //ViewData["PreguntaId"] = new SelectList(_context.preguntas, "PreguntaId", "tituloPregunta", opcionPregunta.PreguntaId);
             ViewBag.PreguntaId = opcionPregunta.PreguntaId;
