@@ -30,16 +30,19 @@ namespace Encuestadora_Identity2.Controllers
         {
             ViewData["CurrentFilter"] = searchString;
             ViewBag.ClienteId = userName;
-            var encuestasRespondidas = from s in _context.encuestasRespondidas.Include(e => e.ApplicationUser).Include(e => e.encuesta).Include(e => e.opcionPregunta).Include(e => e.pregunta).OrderBy(e => e.PreguntaId).ThenBy(e => e.OpcionPreguntaId)
+            var encuestasRespondidas = from s in _context.encuestasRespondidas.Include(e => e.encuesta).Include(e => e.opcionPregunta).Include(e => e.pregunta).Where(s => s.encuesta.tituloEncuesta.Contains(searchString)).OrderBy(e => e.PreguntaId).ThenBy(e => e.OpcionPreguntaId)
                                        select s;
+            //var encuestasRespondidasAgrupadas = encuestasRespondidas.GroupBy(s => s.PreguntaId);
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                encuestasRespondidas = encuestasRespondidas.Where(s => s.encuesta.tituloEncuesta.Contains(searchString));
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    encuestasRespondidas = encuestasRespondidas.GroupBy(e => e.PreguntaId);
 
-            }
 
+            //}
+            
             return View(await encuestasRespondidas.AsNoTracking().ToListAsync());
+            //return View(await custQuery.ToListAsync());
         }
 
         // GET: EncuestaRespondida/Details/5
