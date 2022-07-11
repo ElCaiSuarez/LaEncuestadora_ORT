@@ -9,7 +9,7 @@
 
 <p>
     @*<a class="btn-link" href="/Identity/Account/Manage">Volver a Mi Perfil</a>*@
-    <button type="button" onclick="window.open('/Identity/Account/Manage', '_self');" class="btn btn-secondary">Volver a Mi Perfil</button>
+    <button type="button" onclick="window.open('/Identity/Account/Manage', '_self');" class="btn btn-secondary">Ver Mi Perfil</button>
 </p>
 
 <div class="container-fluid">
@@ -95,7 +95,7 @@
                                 }
                                 <td class="col-2 col-sm-2 text-center">
                                     @*<a class="text-white-50" href="/EncuestaRespondida/ResponderPreguntas?EncuestaId=@item.EncuestaId&&userName=@User.Identity.Name">Responder</a>*@
-                                    <button type="button" onclick="window.open('/EncuestaRespondida/ResponderPreguntas?EncuestaId=@item.EncuestaId&&userName=@User.Identity.Name', '_self');" class="btn btn-success">Responder</button>
+                                    <button type="button" onclick="window.open('/EncuestaRespondida/ResponderPreguntas?EncuestaId=@item.EncuestaId&&userName=@User.Identity.Name', '_self');" class="btn btn-primary">Responder</button>
                                 </td>
                             </tr>
                         }

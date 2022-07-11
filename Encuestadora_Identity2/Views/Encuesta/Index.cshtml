@@ -10,9 +10,9 @@
 
 <p>
     @*<a class="btn-link" href="/Encuesta/Create?userName=@User.Identity.Name">Crear Encuesta</a> |*@
-    <button type="button" onclick="window.open('/Encuesta/Create?userName=@User.Identity.Name', '_self');" class="btn btn-secondary">Crear Encuesta</button>
+    <button type="button" onclick="window.open('/Encuesta/Create?userName=@User.Identity.Name', '_self');" class="btn btn-primary">Crear Encuesta</button>
     @*<a class="btn-link" href="/Identity/Account/Manage">Volver a Mi Perfil</a>*@
-    <button type="button" onclick="window.open('/Identity/Account/Manage', '_self');" class="btn btn-secondary">Volver a Mi Perfil</button>
+    <button type="button" onclick="window.open('/Identity/Account/Manage', '_self');" class="btn btn-secondary">Ver Mi Perfil</button>
 </p>
 <table>
     <thead class="btn btn-primary col-12">
@@ -86,11 +86,11 @@
             {
                 <td class="col-3 text-center">
                     @*<a asp-action="Details" asp-route-id="@item.EncuestaId">Ver</a> |*@
-                    <button type="button" onclick="window.open('/Encuesta/Details/@item.EncuestaId', '_self');" class="btn btn-success btn-sm">Ver</button>
+                    <button type="button" onclick="window.open('/Encuesta/Details/@item.EncuestaId', '_self');" class="btn btn-primary btn-sm">Ver</button>
                     @*<a href="/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name">Editar</a> |*@
-                    <button type="button" onclick="window.open('/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name', '_self');" class="btn btn-success btn-sm">Editar</button>
+                    <button type="button" onclick="window.open('/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name', '_self');" class="btn btn-primary btn-sm">Editar</button>
                     @*<a asp-action="Delete" asp-route-id="@item.EncuestaId">Borrar</a>*@
-                    <button type="button" onclick="window.open('/Encuesta/Delete/@item.EncuestaId', '_self');" class="btn btn-success btn-sm">Borrar</button>
+                    <button type="button" onclick="window.open('/Encuesta/Delete/@item.EncuestaId', '_self');" class="btn btn-primary btn-sm">Borrar</button>
                 </td>
             }
 
