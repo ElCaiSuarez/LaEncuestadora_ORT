@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Encuestadora_Identity2.Migrations
 {
-    public partial class CustomUserData1 : Migration
+    public partial class GenerarBaseDeDatos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -186,7 +186,7 @@ namespace Encuestadora_Identity2.Migrations
                     PreguntaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     tituloPregunta = table.Column<string>(maxLength: 40, nullable: false),
-                    EncuestaId = table.Column<int>(nullable: true)
+                    EncuestaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -196,7 +196,7 @@ namespace Encuestadora_Identity2.Migrations
                         column: x => x.EncuestaId,
                         principalTable: "encuestas",
                         principalColumn: "EncuestaId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -206,7 +206,7 @@ namespace Encuestadora_Identity2.Migrations
                     OpcionPreguntaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     tituloOpcion = table.Column<string>(maxLength: 40, nullable: false),
-                    PreguntaId = table.Column<int>(nullable: true)
+                    PreguntaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,7 +216,7 @@ namespace Encuestadora_Identity2.Migrations
                         column: x => x.PreguntaId,
                         principalTable: "preguntas",
                         principalColumn: "PreguntaId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -251,13 +251,15 @@ namespace Encuestadora_Identity2.Migrations
                         column: x => x.OpcionPreguntaId,
                         principalTable: "opciones",
                         principalColumn: "OpcionPreguntaId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
+                        //onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_encuestasRespondidas_preguntas_PreguntaId",
                         column: x => x.PreguntaId,
                         principalTable: "preguntas",
                         principalColumn: "PreguntaId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
+                        //onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

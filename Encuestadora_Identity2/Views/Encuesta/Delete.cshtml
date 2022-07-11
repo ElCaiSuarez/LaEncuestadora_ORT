@@ -5,45 +5,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Borrar</h1>
-
-<h3>@Html.DisplayFor(model => model.tituloEncuesta)</h3>
+<h4>Usted esta seguro de borrar @Html.DisplayFor(model => model.tituloEncuesta)? </h4>
+<hr />
+<p>
+    @*<button type="button" onclick="window.open('/Encuesta/Edit?id=@Model.EncuestaId&userName=@User.Identity.Name', '_self');" class="btn btn-primary">Editar Encuesta</button>
+        <button type="button" onclick="window.open('/Pregunta?EncuestaId=@Model.EncuestaId', '_self');" class="btn btn-primary">Mis Preguntas</button>*@
+    <button title="Mis Encuestas" type="button" onclick="window.open('/Encuesta?userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_atras.svg" class="img-fluid" alt="Atras" /></button>
+    @*<button type="button" onclick="window.open('/Encuesta?userName=@User.Identity.Name', '_self');" class="btn btn-secondary">Mis Encuestas</button>*@
+</p>
 <div>
-    <h4>Usted esta seguro? </h4>
-    <hr />
+
     <dl class="row">
         @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.tituloEncuesta)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.tituloEncuesta)
-        </dd>*@
-        <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.tituloEncuesta)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.tituloEncuesta)
+            </dd>*@
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.datetimeCreacionEncuesta)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.datetimeCreacionEncuesta)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.datetimeVencimientoEncuesta)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.datetimeVencimientoEncuesta)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.puntosEncuesta)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.puntosEncuesta)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="EncuestaId" />
-        <input type="submit" value="Borrar" class="btn btn-danger" />
-        
+        <input type="submit" value="Borrar Encuesta" class="btn btn-success" />
+
     </form>
 </div>
-<div>
+@*<div>
     <a class="btn-link" href="/Encuesta?userName=@User.Identity.Name">Volver a Mis Encuestas</a>
-</div>
+</div>*@

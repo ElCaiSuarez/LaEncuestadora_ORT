@@ -171,7 +171,7 @@ namespace Encuestadora_Identity2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("PreguntaId")
+                    b.Property<int>("PreguntaId")
                         .HasColumnType("int");
 
                     b.Property<string>("tituloOpcion")
@@ -193,7 +193,7 @@ namespace Encuestadora_Identity2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EncuestaId")
+                    b.Property<int>("EncuestaId")
                         .HasColumnType("int");
 
                     b.Property<string>("tituloPregunta")
@@ -379,14 +379,18 @@ namespace Encuestadora_Identity2.Migrations
                 {
                     b.HasOne("Encuestadora_Identity2.Models.Pregunta", "Pregunta")
                         .WithMany("opciones")
-                        .HasForeignKey("PreguntaId");
+                        .HasForeignKey("PreguntaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Encuestadora_Identity2.Models.Pregunta", b =>
                 {
                     b.HasOne("Encuestadora_Identity2.Models.Encuesta", "Encuesta")
                         .WithMany("preguntas")
-                        .HasForeignKey("EncuestaId");
+                        .HasForeignKey("EncuestaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

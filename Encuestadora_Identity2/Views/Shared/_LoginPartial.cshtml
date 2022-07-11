@@ -25,11 +25,17 @@
             <li class="nav-item">
                 <a class="nav-link text-success font-weight-bold" href="/Encuesta/Disponible?userName=@User.Identity.Name" title="Responder">Responder Encuestas</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-success font-weight-bold" href="/Identity/Account/Manage" title="Responder">Canjear Puntos</a>
+            </li>
         }
         else if (appUser.CustomTag == cliente)
         {
             <li class="nav-item">
                 <a class="nav-link text-success font-weight-bold" href="/Encuesta?userName=@User.Identity.Name" title="Mis Encuestas">Mis Encuestas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-success font-weight-bold" href="/Identity/Account/Manage" title="Responder">Mis Pagos</a>
             </li>
         }
         <li class="nav-item">

@@ -12,5 +12,8 @@ function cambioCustomTag() {
     //alert("Ya puede crear su cuenta de Cliente")
 }
 function canjear() {
-    alert("Puntos Canjeados...")
+    alert("Puntos Canjeados...(Fuera del alcance del proyecto) Implementar un carrito de compras con GiftCards, para canjear por los puntos del USUARIO")
+}
+function cobrar() {
+    alert("Membresia Cobrada...(Fuera del alcance del proyecto) Implementar un sistema de cobro online, para la membresia del CLIENTE")
 }

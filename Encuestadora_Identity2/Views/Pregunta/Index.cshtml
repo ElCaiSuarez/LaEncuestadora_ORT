@@ -3,42 +3,67 @@
 @{
     ViewData["Title"] = "Preguntas";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var darAviso = false;
 }
 
 <h1>Mis Preguntas de @ViewBag.Encuesta.tituloEncuesta</h1>
-
 <p>
-    <a class="btn-link" href="/Pregunta/Create?EncuestaId=@ViewBag.Encuesta.EncuestaId">Crear Pregunta</a> |
-    <a class="btn-link" href="/Encuesta?userName=@User.Identity.Name">Volver a Mis Encuestas</a>
+    @*<a class="btn-link" href="/Encuesta/Create?userName=@User.Identity.Name">Crear Encuesta</a> |*@
+    <button type="button" onclick="window.open('/Pregunta/Create?EncuestaId=@ViewBag.Encuesta.EncuestaId', '_self');" class="btn btn-primary">Crear Pregunta</button>
+    @*<a class="btn-link" href="/Identity/Account/Manage">Volver a Mi Perfil</a>*@
+    <button type="button" onclick="window.open('/Encuesta?userName=@User.Identity.Name', '_self');" class="btn btn-secondary">Mis Encuestas</button>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
+@*<p>
+        <a class="btn-link" href="/Pregunta/Create?EncuestaId=@ViewBag.Encuesta.EncuestaId">Crear Pregunta</a> |
+        <a class="btn-link" href="/Encuesta?userName=@User.Identity.Name">Volver a Mis Encuestas</a>
+    </p>*@
+<table>
+    <thead class="btn btn-primary col-12 col-sm-12">
+        <tr class="col-12 col-sm-12">
+            <th class="col-2 col-sm-2 text-center">
                 @Html.DisplayNameFor(model => model.tituloPregunta)
             </th>
-            <th>
+            <th class="col-2 col-sm-2 text-center">
                 Opciones
             </th>
-            <th></th>
+            <th class="col-2 col-sm-2 text-center"></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.tituloPregunta)
-            </td>
-            <th>
-                @*AGREGAR opciones.count*@
-                @item.opciones.Count
-            </th>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.PreguntaId">Ver</a> |
-                <a class="btn-link" href="/Pregunta/Edit?id=@item.PreguntaId&EncuestaId=@item.EncuestaId">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.PreguntaId">Borrar</a>
-            </td>
-        </tr>
-}
+    <tbody class="btn bg-light col-12 col-sm-12">
+        @foreach (var item in Model)
+        {
+            <tr class="col-12 col-sm-12">
+                <td class="col-2 col-sm-2 text-center">
+                    @Html.DisplayFor(modelItem => item.tituloPregunta)
+                </td>
+                <td class="col-2 col-sm-2 text-center">
+                    @*AGREGAR opciones.count*@
+                    @item.opciones.Count
+                    @if (@item.opciones.Count == 0)
+                    {
+                        darAviso = true;
+                    }
+                </td>
+                <td class="col-2 col-sm-2 text-center">
+                    @*<a asp-action="Details" asp-route-id="@item.PreguntaId">Ver</a> |*@
+                    <button type="button" onclick="window.open('/Pregunta/Details/@item.PreguntaId', '_self');" class="btn btn-primary btn-sm">Ver</button>
+                    @*<a class="btn-link" href="/Pregunta/Edit?id=@item.PreguntaId&EncuestaId=@item.EncuestaId">Editar</a> |*@
+                    <button type="button" onclick="window.open('/Pregunta/Edit?id=@item.PreguntaId&EncuestaId=@item.EncuestaId', '_self');" class="btn btn-primary btn-sm">Editar</button>
+                    @*<a asp-action="Delete" asp-route-id="@item.PreguntaId">Borrar</a>*@
+                    <button type="button" onclick="window.open('/Pregunta/Delete/@item.PreguntaId', '_self');" class="btn btn-primary btn-sm">Borrar</button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<p hidden id="mensaje" class="btn btn-danger text-center col-4 active"></p>
+
+@if (darAviso)
+{
+    <script>
+        var mensaje = document.getElementById('mensaje');
+        mensaje.removeAttribute("hidden");
+        mensaje.innerHTML = "CUIDADO: Tiene preguntas sin opciones!"
+    </script>
+
+}

@@ -9,95 +9,97 @@
 <h1>Mis Encuestas</h1>
 
 <p>
-    @*<a class="btn-link" href="/Encuesta/Create?userName=@User.Identity.Name">Crear Encuesta</a> |*@
-    <button type="button" onclick="window.open('/Encuesta/Create?userName=@User.Identity.Name', '_self');" class="btn btn-primary">Crear Encuesta</button>
-    @*<a class="btn-link" href="/Identity/Account/Manage">Volver a Mi Perfil</a>*@
-    <button type="button" onclick="window.open('/Identity/Account/Manage', '_self');" class="btn btn-secondary">Ver Mi Perfil</button>
+    <button title="Crear" type="button" onclick="window.open('/Encuesta/Create?userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_crear.svg" class="img-fluid" alt="Crear" /></button>
 </p>
-<table>
-    <thead class="btn btn-primary col-12">
-        <tr class="col-12" style="display:inline-table">
-            <th class="col-2 text-center">
-                @Html.DisplayNameFor(model => model.tituloEncuesta)
-            </th>
-            <th class="col-2 text-center">
-                @Html.DisplayNameFor(model => model.datetimeCreacionEncuesta)
-            </th>
-            <th class="col-2 text-center">
-                @Html.DisplayNameFor(model => model.datetimeVencimientoEncuesta)
-            </th>
-            <th class="col-1 text-center">
-                Preguntas
-            </th>
-            <th class="col-2 text-center">
-                @Html.DisplayNameFor(model => model.puntosEncuesta)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody class="btn bg-light col-12">
-        @foreach (var item in Model)
-        {
-        <tr class="col-12" style="display:inline-table">
-            <td class="col-2 text-center">
-                @Html.DisplayFor(modelItem => item.tituloEncuesta)
-            </td>
-            <td class="col-2 text-center">
-                @Html.DisplayFor(modelItem => item.datetimeCreacionEncuesta)
-            </td>
-            <td class="col-2 text-center">
-                @Html.DisplayFor(modelItem => item.datetimeVencimientoEncuesta)
-            </td>
-            <td class="col-1 text-center">
-                @*AGREGAR preguntas.count*@
-                @item.preguntas.Count
-                @if (@item.preguntas.Count == 0)
+<div class="container-fluid">
+    <section class="row justify-content-start align-items-center">
+        <table class="table-responsive">
+            <thead class="btn btn-success col-12 col-sm-12">
+                <tr class="col-12 col-sm-12" style="display:inline-table">
+                    <th class="col-3 col-sm-3 text-center">
+                        @Html.DisplayNameFor(model => model.tituloEncuesta)
+                    </th>
+                    <th class="col-2 col-sm-2 text-center">
+                        @Html.DisplayNameFor(model => model.datetimeCreacionEncuesta)
+                    </th>
+                    <th class="col-2 col-sm-2 text-center">
+                        @Html.DisplayNameFor(model => model.datetimeVencimientoEncuesta)
+                    </th>
+                    <th class="col-2 col-sm-2 text-center">
+                        Preguntas
+                    </th>
+                    <th class="col-3 col-sm-3 text-center">
+                        @Html.DisplayNameFor(model => model.puntosEncuesta)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="btn bg-light col-12 col-sm-12">
+                @foreach (var item in Model)
                 {
-                    darAviso = true;
-                }
-            </td>
-            @if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_ORO)
-            {
-                <td class="col-2">
-                    <p class="btn btn-warning text-black-50 font-weight-bold active" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
-                </td>
-            }
-            else if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_PLATA)
-            {
-                <td class="col-2">
-                    <p class="btn btn-secondary active" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
-                </td>
-            }
-            else
-            {
-                <td class="col-2">
-                    @Html.DisplayFor(modelItem => item.puntosEncuesta)
-                </td>
-            }
-            @if (item.datetimeVencimientoEncuesta < DateTime.Now)
-            {
-                <td class="col-3 text-center">
-                    @*<a asp-action="Details" asp-route-id="@item.EncuestaId">Ver</a> |*@
-                    <button type="button" onclick="window.open('/EncuestaRespondida/Resultado?SearchString=@item.tituloEncuesta&userName=@User.Identity.Name', '_self');" class="btn btn-success btn-sm">Resultado</button>
-                   
-                </td>
-            }
-            else
-            {
-                <td class="col-3 text-center">
-                    @*<a asp-action="Details" asp-route-id="@item.EncuestaId">Ver</a> |*@
-                    <button type="button" onclick="window.open('/Encuesta/Details/@item.EncuestaId', '_self');" class="btn btn-primary btn-sm">Ver</button>
-                    @*<a href="/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name">Editar</a> |*@
-                    <button type="button" onclick="window.open('/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name', '_self');" class="btn btn-primary btn-sm">Editar</button>
-                    @*<a asp-action="Delete" asp-route-id="@item.EncuestaId">Borrar</a>*@
-                    <button type="button" onclick="window.open('/Encuesta/Delete/@item.EncuestaId', '_self');" class="btn btn-primary btn-sm">Borrar</button>
-                </td>
-            }
+                    <tr class="col-12 col-sm-12" style="display:inline-table">
+                        <td class="col-3 col-sm-3 text-center">
+                            <b>@Html.DisplayFor(modelItem => item.tituloEncuesta)</b>
+                        </td>
+                        <td class="col-2 col-sm-2 text-center">
+                            @Html.DisplayFor(modelItem => item.datetimeCreacionEncuesta)
+                        </td>
+                        <td class="col-2 col-sm-2 text-center">
+                            @Html.DisplayFor(modelItem => item.datetimeVencimientoEncuesta)
+                        </td>
+                        <td class="col-2 col-sm-2 text-center">
+                            @*AGREGAR preguntas.count*@
+                            @item.preguntas.Count
+                            @if (@item.preguntas.Count == 0)
+                            {
+                                darAviso = true;
+                            }
+                            <button title="Ver Preguntas" type="button" onclick="window.open('/Pregunta?EncuestaId=@item.EncuestaId', '_self');" class="btn btn-light"><img src="/img/icono_ver.svg" class="img-fluid" alt="Ver" /></button>
+                        </td>
+                        @if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_ORO)
+                        {
+                            <td class="col-3 col-sm-3">
+                                <p class="btn btn-warning text-black-50 font-weight-bold active" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
+                            </td>
+                        }
+                        else if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_PLATA)
+                        {
+                            <td class="col-3 col-sm-3">
+                                <p class="btn btn-secondary active" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="col-3 col-sm-3">
+                                @Html.DisplayFor(modelItem => item.puntosEncuesta)
+                            </td>
+                        }
+                    </tr>
+                    <tr class="col-12 col-sm-12" style="display:inline-table">
+                        <td class="col-1 col-sm-1"></td>
+                        @if (item.datetimeVencimientoEncuesta < DateTime.Now)
+                        {
 
-        </tr>
-        }
-    </tbody>
-</table>
+                            <td style="text-align-last: start;">
+                                <button title="Resultado" type="button" onclick="window.open('/EncuestaRespondida/Resultado?SearchString=@item.tituloEncuesta&userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_resultado.svg" class="img-fluid" alt="Resultado" /></button>
+                            </td>
+
+                        }
+                        else
+                        {
+
+                            <td style="text-align-last: start;">
+                                <button title="Ver Encuesta" type="button" onclick="window.open('/Encuesta/Details/@item.EncuestaId', '_self');" class="btn btn-light"><img src="/img/icono_ver.svg" class="img-fluid" alt="Ver" /></button>
+                                <button title="Editar" type="button" onclick="window.open('/Encuesta/Edit?id=@item.EncuestaId&userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_editar.svg" class="img-fluid" alt="Editar" /></button>
+                                <button title="Borrar" type="button" onclick="window.open('/Encuesta/Delete/@item.EncuestaId', '_self');" class="btn btn-light"><img src="/img/icono_borrar.svg" class="img-fluid" alt="Borrar" /></button>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</div>
 <p hidden id="mensaje" class="btn btn-danger text-center col-4 active"></p>
 
 @if (darAviso)

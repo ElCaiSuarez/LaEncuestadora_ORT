@@ -23,6 +23,8 @@
     <Compile Remove="Migrations\20220708204216_CustomUserData1.Designer.cs" />
     <Compile Remove="Migrations\20220708204600_CustomUserData1.cs" />
     <Compile Remove="Migrations\20220708204600_CustomUserData1.Designer.cs" />
+    <Compile Remove="Migrations\20220708205327_CustomUserData1.cs" />
+    <Compile Remove="Migrations\20220708205327_CustomUserData1.Designer.cs" />
     <Compile Remove="Models\Cliente.cs" />
   </ItemGroup>
 
