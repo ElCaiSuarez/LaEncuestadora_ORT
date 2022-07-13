@@ -28,18 +28,41 @@ namespace Encuestadora_Identity2.Controllers
         public async Task<IActionResult> Index(string userName)
         {
             var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
-            var encuestadoraDBContext = _context.encuestas.Include(e => e.preguntas).Where(e => e.ApplicationUserId == ApplicationUser.Id);
+            var encuestadoraDBContext = _context.encuestas.Include(e => e.preguntas).ThenInclude(e => e.opciones).Where(e => e.ApplicationUserId == ApplicationUser.Id);
             return View(await encuestadoraDBContext.ToListAsync());
         }
-        
+
         //AGREGADO
-        public async Task<IActionResult> Disponible(string userName, bool? esEncuestaRespondida)
+        public IActionResult Disponible(bool? esEncuestaRespondida)
         {
-            var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
-            var encuestadoraDBContext = _context.encuestas.Include(e => e.preguntas).ThenInclude(e => e.opciones).Where(e => e.datetimeVencimientoEncuesta > DateTime.Now).OrderByDescending(e => e.puntosEncuesta);
-            ViewBag.ApplicationUserId = ApplicationUser.Id;
+            //var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
+            var encuestadoraDBContext = _context.encuestas.Include(e => e.preguntas).ThenInclude(e => e.opciones).Where(e => e.datetimeVencimientoEncuesta > DateTime.Now && e.preguntas.Count > 0).OrderByDescending(e => e.puntosEncuesta);
+            var encuestasDisponibles = new List<Encuesta>();
+            foreach (var item in encuestadoraDBContext)
+            {
+                var i = 0;
+                var preguntas = item.preguntas.ToList();
+                var encuestaCompleta = true;
+                //VALIDO QUE CADA PREGUNTA TENGA OPCIONES
+                while (i < preguntas.Count && encuestaCompleta)
+                {
+                    if (preguntas[i].opciones.Count == 0)
+                    {
+                        encuestaCompleta = false;
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+                if (encuestaCompleta)
+                {
+                    encuestasDisponibles.Add(item);
+                }
+            }
             ViewBag.esEncuestaRespondida = esEncuestaRespondida;
-            return View(await encuestadoraDBContext.ToListAsync());
+            //return View(await encuestadoraDBContext.ToListAsync());
+            return View(encuestasDisponibles);
         }
 
         //METODO DETAILS 16/06/2022 con Include y ThenInclude

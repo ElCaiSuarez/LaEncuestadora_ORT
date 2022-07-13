@@ -108,7 +108,7 @@ namespace Encuestadora_Identity2.Areas.Identity.Pages.Account.Manage
                 return RedirectToPage();
             }
 
-            StatusMessage = "Your email is unchanged.";
+            StatusMessage = "Su correo cambio.";
             return RedirectToPage();
         }
 

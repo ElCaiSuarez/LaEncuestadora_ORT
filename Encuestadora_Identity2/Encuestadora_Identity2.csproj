@@ -45,4 +45,6 @@
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://gitpod.io/schemas/gitpod-schema.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

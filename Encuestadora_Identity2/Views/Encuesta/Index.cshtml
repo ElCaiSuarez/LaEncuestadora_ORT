@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Encuestas";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var darAviso = false;
+    var darAvisoPregunta = false;
+    var darAvisoOpcion = false;
 }
 <div class="container-fluid">
     <div class="row justify-content-start align-items-center">
@@ -15,6 +16,7 @@
 </div>
 
 <p>
+    <button title="Ir al Perfil" type="button" onclick="window.open('/Identity/Account/Manage', '_self');" class="btn btn-light"><img src="/img/icono_perfil.svg" class="img-fluid" alt="Perfil" /></button>
     <button title="Crear Encuesta" type="button" onclick="window.open('/Encuesta/Create?userName=@User.Identity.Name', '_self');" class="btn btn-light"><img src="/img/icono_crear.svg" class="img-fluid" alt="Crear" /></button>
 </p>
 <div class="container-fluid">
@@ -58,31 +60,38 @@
 
                             @if (@item.preguntas.Count == 0)
                             {
-                                darAviso = true;
-                                <div class="mensaje2 btn btn-sm active">@item.preguntas.Count</div>
+                                darAvisoPregunta = true;
+                                <div class="mensaje2">@item.preguntas.Count</div>
                             }
                             else
                             {
-                                @item.preguntas.Count
+                                <div class="mensaje3">@item.preguntas.Count</div>
+                                foreach (var item2 in item.preguntas)
+                                {
+                                    if (item2.opciones.Count == 0)
+                                    {
+                                        darAvisoOpcion = true;
+                                    }
+                                }
                             }
-                            <button title="Ver Preguntas" type="button" onclick="window.open('/Pregunta?EncuestaId=@item.EncuestaId', '_self');" class="btn btn-light"><img src="/img/icono_ver.svg" class="img-fluid" alt="Ver" /></button>
+                            <button title="Ver Preguntas" type="button" onclick="window.open('/Pregunta?EncuestaId=@item.EncuestaId', '_self');" class="btn btn-sm active"><img src="/img/icono_ver.svg" class="small" alt="Ver" /></button>
                         </td>
                         @if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_ORO)
                         {
                             <td class="col-3 col-sm-3">
-                                <p class="btn btn-warning text-black-50 font-weight-bold active" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
+                                <p class="btn btn-warning btn-sm text-black-50 font-weight-bold active col-2 col-sm-2" style="display:inline"> ORO  </p>
                             </td>
                         }
                         else if (item.puntosEncuesta == PuntosEncuesta.ENCUESTA_PLATA)
                         {
                             <td class="col-3 col-sm-3">
-                                <p class="btn btn-secondary active" style="display:inline">@Html.DisplayFor(modelItem => item.puntosEncuesta)</p>
+                                <p class="btn btn-secondary active btn-sm col-2 col-sm-2" style="display:inline">PLATA </p>
                             </td>
                         }
                         else
                         {
                             <td class="col-3 col-sm-3">
-                                @Html.DisplayFor(modelItem => item.puntosEncuesta)
+                                <p class="btn active btn-sm col-2 col-sm-2" style="display:inline">GRATIS</p>
                             </td>
                         }
                     </tr>
@@ -112,17 +121,17 @@
 </div>
 @*<p hidden id="mensaje" class="btn btn-danger text-center col-4 active"></p>*@
 
-@if (darAviso)
+@if (darAvisoPregunta || darAvisoOpcion)
 {
-<script>
-    var mensaje = document.getElementById('mensaje');
-    mensaje.removeAttribute("hidden");
-    mensaje.innerHTML = "ERROR: Tiene encuestas sin preguntas y no seran publicadas!"
-    const mensajes2 = document.getElementsByClassName("mensaje2");
-    for (let i = 0; i < mensajes2.length; i++) {
-        mensajes2[i].style.cssText = "font-size:20px;color:red;";
-    }
-</script>
+    <script>
+        var mensaje = document.getElementById('mensaje');
+        mensaje.removeAttribute("hidden");
+        mensaje.innerHTML = "ERROR: Tiene encuestas con errores y no seran publicadas!"
+        const mensajes2 = document.getElementsByClassName("mensaje2");
+        for (let i = 0; i < mensajes2.length; i++) {
+            mensajes2[i].style.cssText = "font-size:20px;color:red;";
+        }
+    </script>
 
 }
 

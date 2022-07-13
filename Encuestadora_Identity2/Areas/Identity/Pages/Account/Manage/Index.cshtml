@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Perfil";
+    ViewData["Title"] = "Actualizar Perfil";
     ViewData["ActivePage"] = ManageNavPages.Index;
     //AGREGADO
     var Cliente = "Cliente";
@@ -15,8 +15,8 @@
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Username">Correo</label>
-                <input asp-for="Username" class="form-control" disabled />
+                @*<label asp-for="Username">Usuario</label>*@
+                <input type="hidden" asp-for="Username" class="form-control" disabled />
             </div>
             @*AGREGADO*@
             <div class="form-group">
@@ -47,9 +47,9 @@
             }
             else if (@ViewData["CustomTag"].ToString() == Usuario)
             {
-                <div>
-                    <label>Puntos Acumulados: </label><p class="btn btn-secondary" style="display:inline">@ViewData["PuntosAcumulados"]</p> @*<button type="button" class="btn btn-secondary" onclick="canjear()">Canjear</button>*@
-                </div>
+        <div>
+            <label>Puntos Acumulados:  </label>@*<p class="btn btn-success" style="display:inline"> @ViewData["PuntosAcumulados"]</p>*@ <button type="button" class="btn btn-success" onclick="canjear()">@ViewData["PuntosAcumulados"]</button>
+        </div>
             }
             <button id="update-profile-button" type="submit" class="btn btn-success">Guardar</button>
         </form>

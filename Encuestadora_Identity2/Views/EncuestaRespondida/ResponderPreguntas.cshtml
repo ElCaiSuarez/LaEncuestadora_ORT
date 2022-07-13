@@ -8,10 +8,9 @@
 <h3>Seleccionar Opcion </h3>
 <h1>@Html.DisplayFor(model => model.pregunta.tituloPregunta)</h1>
 <hr />
-<p>
-    @*<a class="btn-link" href="/Identity/Account/Manage">Volver a Mi Perfil</a>*@
-    <button title="Encuestas Disponibles" type="button" onclick="window.open('/Encuesta/Disponible?userName=@Model.ApplicationUser.UserName', '_self');" class="btn btn-light"><img src="/img/icono_atras.svg" class="img-fluid" alt="Crear" /></button>
-</p>
+@*<p>
+        <button title="Encuestas Disponibles" type="button" onclick="window.open('/Encuesta/Disponible', '_self');" class="btn btn-light"><img src="/img/icono_atras.svg" class="img-fluid" alt="Crear" /></button>
+    </p>*@
 <div class="row">
     <div class="col-md-10">
         <form asp-action="Create">
@@ -75,4 +74,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
 

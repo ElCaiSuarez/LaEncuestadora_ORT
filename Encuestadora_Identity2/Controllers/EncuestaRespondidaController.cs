@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Encuestadora_Identity2.Data;
 using Encuestadora_Identity2.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Encuestadora_Identity2.Controllers
 {
     public class EncuestaRespondidaController : Controller
     {
         private readonly ApplicationDbContext _context;
+
+        public object WebSecurity { get; private set; }
 
         public EncuestaRespondidaController(ApplicationDbContext context)
         {
@@ -40,7 +43,7 @@ namespace Encuestadora_Identity2.Controllers
 
 
             //}
-            
+
             return View(await encuestasRespondidas.AsNoTracking().ToListAsync());
             //return View(await custQuery.ToListAsync());
         }
@@ -86,10 +89,10 @@ namespace Encuestadora_Identity2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var ApplicationUser = _context.usuarios.Single(i => i.Id == encuestaRespondida.ApplicationUserId);
+                //var ApplicationUser = _context.usuarios.Single(i => i.Id == encuestaRespondida.ApplicationUserId);
                 _context.Add(encuestaRespondida);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("ResponderPreguntas", "EncuestaRespondida", new { EncuestaId = encuestaRespondida.EncuestaId, userName = ApplicationUser.UserName });
+                return RedirectToAction("ResponderPreguntas", "EncuestaRespondida", new { EncuestaId = encuestaRespondida.EncuestaId, userName = HttpContext.User.Identity.Name });
             }
             //ViewData["ApplicationUserId"] = new SelectList(_context.usuarios, "Id", "Id", encuestaRespondida.ApplicationUserId);
             //ViewData["EncuestaId"] = new SelectList(_context.encuestas, "EncuestaId", "tituloEncuesta", encuestaRespondida.EncuestaId);
@@ -98,66 +101,128 @@ namespace Encuestadora_Identity2.Controllers
             return View(encuestaRespondida);
         }
 
-        public IActionResult ResponderPreguntas(int EncuestaId, string userName)
+        public IActionResult ResponderPreguntas(int EncuestaId)
         {
-            //OTRA OPCION ES QUE EN DISPONIBLES NO LA MUESTRE
-            var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
-            var encuesta = _context.encuestas
+            var ApplicationUser = _context.usuarios.FirstOrDefault(x => x.UserName == HttpContext.User.Identity.Name);
+            var Encuesta = _context.encuestas
                     .Include(e => e.preguntas)
                     .ThenInclude(s => s.opciones)
                     .Single(m => m.EncuestaId == EncuestaId);
-            var preguntas = encuesta.preguntas;
-            var preguntasSinResponder = new List<Pregunta>();
+            var preguntas = Encuesta.preguntas;
+            //Inicializo variables para las Preguntas de la encuesta
             var preguntasinResponder = new Pregunta();
+            var preguntasSinResponder = new List<Pregunta>();
             var esEncuestaRespondida = false;
+            var puntos = 0;
             ////Si no hay preguntas en la encuesta vuelve a disponibles
-            //if (preguntas.Count > 0)
-            //{
             foreach (Pregunta p in preguntas)
             {
                 //Si la pregunta ya fue contestada por el usuario no la agrego a la lista de preguntasSinResponder
-                if (!EncuestaRespondidaExists(encuesta.EncuestaId, ApplicationUser.Id, p.PreguntaId))
+                if (!EncuestaRespondidaExists(Encuesta.EncuestaId, ApplicationUser.Id, p.PreguntaId))
                 {
                     //Agrego la pregunta a la lista de preguntasSinResponder
                     preguntasSinResponder.Add(p);
                 }
 
             }
-            //Si no hay preguntas sin responder en la encuesta vuelve a disponibles
+            //Si hay preguntas sin responder en la encuesta
             if (preguntasSinResponder.Count > 0)
             {
+                //Saco la 1er Pregunta de la Lista de Preguntas sin responder
                 preguntasinResponder = preguntasSinResponder.OfType<Pregunta>().FirstOrDefault();
+                //Si es la ultima sumo los puntos de la encuesta al usuario (OTRA OPCION ES CORRER UN PROCESO AL INICIO DEL LOGIN QUE SUME LAS ENCUESTASRESPONDIDAS)
                 if (preguntasSinResponder.Count == 1)
                 {
-                    int puntos = (int)encuesta.puntosEncuesta;
+                    puntos = (int)Encuesta.puntosEncuesta;
                     ApplicationUser.sumarPuntosEncuesta(puntos);
-                    _context.SaveChangesAsync();
+                    
                 }
             }
             else
             {
+                //Si no hay preguntas sin responder en la encuesta vuelve a disponibles con TRUE
                 esEncuestaRespondida = true;
-                return RedirectToAction("Disponible", "Encuesta", new { userName = userName, esEncuestaRespondida = esEncuestaRespondida });
+                return RedirectToAction("Disponible", "Encuesta", new { esEncuestaRespondida = esEncuestaRespondida });
 
             }
-            // }
+            // Creo la EncuestaRespondida
             var encuestaRespondida = new EncuestaRespondida();
-            if (!esEncuestaRespondida)
-            {
-                encuestaRespondida.encuesta = encuesta;
-                encuestaRespondida.EncuestaId = encuesta.EncuestaId;
-                encuestaRespondida.ApplicationUser = ApplicationUser;
-                encuestaRespondida.ApplicationUserId = ApplicationUser.Id;
-                encuestaRespondida.datetimeRespuestaEncuesta = DateTime.Now;
-                encuestaRespondida.pregunta = preguntasinResponder;
-                encuestaRespondida.PreguntaId = preguntasinResponder.PreguntaId;
-                ViewData["OpcionPreguntaId"] = new SelectList(preguntasinResponder.opciones, "OpcionPreguntaId", "tituloOpcion");
-            }
-            ViewBag.esEncuestaRespondida = esEncuestaRespondida;
+            encuestaRespondida.encuesta = Encuesta;
+            encuestaRespondida.EncuestaId = Encuesta.EncuestaId;
+            encuestaRespondida.ApplicationUser = ApplicationUser;
+            encuestaRespondida.ApplicationUserId = ApplicationUser.Id;
+            encuestaRespondida.datetimeRespuestaEncuesta = DateTime.Now;
+            encuestaRespondida.pregunta = preguntasinResponder;
+            encuestaRespondida.PreguntaId = preguntasinResponder.PreguntaId;
+            ViewData["OpcionPreguntaId"] = new SelectList(preguntasinResponder.opciones, "OpcionPreguntaId", "tituloOpcion");
+            //ViewBag.esEncuestaRespondida = esEncuestaRespondida;
             ViewBag.ApplicationUserId = ApplicationUser.Id;
             ViewBag.userName = ApplicationUser.UserName;
+            //ViewBag.esEncuestaRespondida = esEncuestaRespondida;
+            ViewBag.puntos = puntos;
             return View(encuestaRespondida);
         }
+
+        //public IActionResult ResponderPreguntas(int EncuestaId, string userName)
+        //{
+        //    //OTRA OPCION ES QUE EN DISPONIBLES NO LA MUESTRE
+        //    var ApplicationUser = _context.usuarios.Single(i => i.UserName == userName);
+        //    var encuesta = _context.encuestas
+        //            .Include(e => e.preguntas)
+        //            .ThenInclude(s => s.opciones)
+        //            .Single(m => m.EncuestaId == EncuestaId);
+        //    var preguntas = encuesta.preguntas;
+        //    var preguntasSinResponder = new List<Pregunta>();
+        //    var preguntasinResponder = new Pregunta();
+        //    var esEncuestaRespondida = false;
+        //    ////Si no hay preguntas en la encuesta vuelve a disponibles
+        //    //if (preguntas.Count > 0)
+        //    //{
+        //    foreach (Pregunta p in preguntas)
+        //    {
+        //        //Si la pregunta ya fue contestada por el usuario no la agrego a la lista de preguntasSinResponder
+        //        if (!EncuestaRespondidaExists(encuesta.EncuestaId, ApplicationUser.Id, p.PreguntaId))
+        //        {
+        //            //Agrego la pregunta a la lista de preguntasSinResponder
+        //            preguntasSinResponder.Add(p);
+        //        }
+
+        //    }
+        //    //Si no hay preguntas sin responder en la encuesta vuelve a disponibles
+        //    if (preguntasSinResponder.Count > 0)
+        //    {
+        //        preguntasinResponder = preguntasSinResponder.OfType<Pregunta>().FirstOrDefault();
+        //        if (preguntasSinResponder.Count == 1)
+        //        {
+        //            int puntos = (int)encuesta.puntosEncuesta;
+        //            ApplicationUser.sumarPuntosEncuesta(puntos);
+        //            _context.SaveChangesAsync();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        esEncuestaRespondida = true;
+        //        return RedirectToAction("Disponible", "Encuesta", new { userName = userName, esEncuestaRespondida = esEncuestaRespondida });
+
+        //    }
+        //    // }
+        //    var encuestaRespondida = new EncuestaRespondida();
+        //    if (!esEncuestaRespondida)
+        //    {
+        //        encuestaRespondida.encuesta = encuesta;
+        //        encuestaRespondida.EncuestaId = encuesta.EncuestaId;
+        //        encuestaRespondida.ApplicationUser = ApplicationUser;
+        //        encuestaRespondida.ApplicationUserId = ApplicationUser.Id;
+        //        encuestaRespondida.datetimeRespuestaEncuesta = DateTime.Now;
+        //        encuestaRespondida.pregunta = preguntasinResponder;
+        //        encuestaRespondida.PreguntaId = preguntasinResponder.PreguntaId;
+        //        ViewData["OpcionPreguntaId"] = new SelectList(preguntasinResponder.opciones, "OpcionPreguntaId", "tituloOpcion");
+        //    }
+        //    ViewBag.esEncuestaRespondida = esEncuestaRespondida;
+        //    ViewBag.ApplicationUserId = ApplicationUser.Id;
+        //    ViewBag.userName = ApplicationUser.UserName;
+        //    return View(encuestaRespondida);
+        //}
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -270,7 +335,7 @@ namespace Encuestadora_Identity2.Controllers
         }
         private bool EncuestaRespondidaExists(int EncuestaId, string userName, int PreguntaId)
         {
-            
+
             return _context.encuestasRespondidas.Any(e => e.EncuestaId == EncuestaId && e.ApplicationUserId == userName && e.PreguntaId == PreguntaId);
         }
 
